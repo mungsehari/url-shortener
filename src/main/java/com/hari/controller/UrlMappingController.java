@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,12 +58,12 @@ public class UrlMappingController {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
         LocalDateTime start = LocalDateTime.parse(startDate, formatter);
         LocalDateTime end = LocalDateTime.parse(endDate, formatter);
-        List<ClickEventDTO> clickEventDTOs = urlMappingService.getClickEventByDate(shortUrl, start, end);
+        List<ClickEventDTO> clickEventDTOs = urlMappingService.getClickEventsByDate(shortUrl, start, end);
         return ResponseEntity.ok(clickEventDTOs);
 
     }
 
-    @GetMapping("totalClicks")
+    @GetMapping("/totalClicks")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Map<LocalDate, Long>> getTotalClicksByDate(Principal principal,
             @RequestParam("startDate") String startDate,
