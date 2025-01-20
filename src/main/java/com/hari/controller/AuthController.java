@@ -2,7 +2,6 @@ package com.hari.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +19,11 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/login")
-    @CrossOrigin("http://localhost:5173")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(userService.authenticateUser(request));
     }
 
     @PostMapping("/register")
-    @CrossOrigin("http://localhost:5173")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
         User user = new User();
         user.setUsername(request.getUsername());
